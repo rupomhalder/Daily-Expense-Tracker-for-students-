@@ -1,0 +1,121 @@
+ /* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../img/bpc3.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* Container */
+.container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+   
+}
+
+/* Heading */
+.container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input fields */
+.container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.container input:focus {
+  border-color: #2575fc;
+  outline: none;
+}
+
+/* Button */
+.container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.container button:hover {
+  background: #6a11cb;
+}
+
+/* Register link */
+.container p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.container p a {
+  color: #2575fc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container p a:hover {
+  text-decoration: underline;
+}
+
+/* Social login */
+.container h3 {
+  margin: 20px 0 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.social-btn {
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* Google button */
+.social-btn.google {
+  background: #db4437;
+}
+
+.social-btn.google:hover {
+  background: #b33628;
+}
+
+/* Facebook button */
+.social-btn.facebook {
+  background: #4267B2;
+}
+
+.social-btn.facebook:hover {
+  background: #365899;
+}
