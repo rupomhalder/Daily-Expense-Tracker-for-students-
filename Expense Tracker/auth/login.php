@@ -1,36 +1,34 @@
  <?php
 session_start();
-include "../backend/src/routes/db.php"; // database connection
+require_once "../backend/src/routes/db.php"; // this gives you $pdo
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
     $sql = "SELECT * FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
+    if ($user) {
         if (password_verify($password, $user['password'])) {
-            // ✅ Store all user data into session
+            // ✅ Store user info in session
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['name'] = $user['name'];   // 👈 this fixes your warning
-            $_SESSION['email'] = $user['email']; // 👈 this fixes your warning
+            $_SESSION['name']   = $user['name'];
+            $_SESSION['email']  = $user['email'];
 
-            header("Location: ../public/index.php"); // redirect to dashboard
+            header("Location: ../public/index.php");
             exit();
         } else {
-            echo "Invalid password!";
+            $error = "Invalid password!";
         }
     } else {
-        echo "User not found!";
+        $error = "User not found!";
     }
 }
 ?>
+
 
  <!DOCTYPE html>
  <html lang="en">

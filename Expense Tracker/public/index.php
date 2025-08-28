@@ -1,6 +1,6 @@
  <?php
 // dashboard.php
- session_start();
+session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../auth/login.php");
     exit();
@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $userName = $_SESSION['name'];
 $userEmail = $_SESSION['email'];
-
 ?>
 
  <!DOCTYPE html>
@@ -55,37 +54,24 @@ $userEmail = $_SESSION['email'];
              <i class="fa-solid fa-chart-pie"></i>
              <div>Balance: <span id="balance-total">100.00</span></div>
          </div>
-         <button class="add Transaction"><i class="fa-solid fa-plus"></i>Add Transaction</button>
+
+         <!-- Fixed class name -->
+         <button class="toggle-transaction-form-btn">
+             <i class="fa-solid fa-plus"></i> Add Transaction
+         </button>
      </div>
 
      <!-- Add Transaction Form -->
-     <section class="form-section">
-         <h2>Add Transaction</h2>
-         <form id="transaction-form">
-             <div class="input-group">
-                 <label for="transaction-type">Type</label>
-                 <select id="transaction-type" required>
-                     <option value="expense">Expense</option>
-                     <option value="income">Income</option>
-                 </select>
-             </div>
+     <form id="transaction-form">
+         <select id="transaction-type" name="transaction_type">
+             <option value="income">Income</option>
+             <option value="expense">Expense</option>
+         </select>
+         <input id="transaction-description" name="transaction_description" type="text" placeholder="Description">
+         <input id="transaction-amount" name="transaction_amount" type="number" step="0.01" placeholder="Amount">
+         <button type="submit">Add Transaction</button>
+     </form>
 
-             <div class="input-group">
-                 <label for="transaction-description">Description</label>
-                 <input type="text" id="transaction-description" placeholder="Enter transaction description" required>
-             </div>
-
-             <div class="input-group">
-                 <label for="transaction-amount">Amount</label>
-                 <input type="number" id="transaction-amount" placeholder="Enter transaction amount" required>
-             </div>
-
-             <div class="form-buttons">
-                 <button type="submit" class="add-transaction-btn"><i class="fa-solid fa-plus"></i> Add</button>
-                 <button type="reset" class="cancel-transaction-btn">Cancel</button>
-             </div>
-         </form>
-     </section>
 
      <!-- Transactions Table -->
      <section class="table-section">
@@ -94,6 +80,7 @@ $userEmail = $_SESSION['email'];
              <thead>
                  <tr>
                      <th>ID</th>
+                     <th>Date</th>
                      <th>Type</th>
                      <th>Description</th>
                      <th>Amount</th>
@@ -101,23 +88,14 @@ $userEmail = $_SESSION['email'];
                  </tr>
              </thead>
              <tbody>
-                 <tr>
-                     <td>1</td>
-                     <td><span class="type-badge type-expense">Expense</span></td>
-                     <td>Gym</td>
-                     <td class="amount-expense">$40</td>
-                     <td><button class="delete-button"><i class="fas fa-trash"></i> Delete</button></td>
-                 </tr>
-                 <tr>
-                     <td>2</td>
-                     <td><span class="type-badge type-income">Income</span></td>
-                     <td>Freelance Work</td>
-                     <td class="amount-income">$200</td>
-                     <td><button class="delete-button"><i class="fas fa-trash"></i> Delete</button></td>
-                 </tr>
+                 <!-- New rows will be added here -->
              </tbody>
          </table>
      </section>
+
+     <div class="today-total">
+         <h3>Today's Total: <span id="today-total">$0</span></h3>
+     </div>
 
      <script type="module" src="../assets/js/script.js"></script>
  </body>

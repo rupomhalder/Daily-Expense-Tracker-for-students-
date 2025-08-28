@@ -1,12 +1,13 @@
  <?php
-$servername = "localhost";
-$username = "root";
-$password = ""; // <-- check here
-$database = "expense_tracker";
+$host = "localhost";        // Database host
+$dbname = "expense_tracker"; // Your database name
+$user = "root";             // Your MySQL username (default in XAMPP is "root")
+$pass = "";                 // Your MySQL password (default in XAMPP is empty)
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("❌ Connection failed: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("DB Connection failed: " . $e->getMessage());
 }
 ?>
